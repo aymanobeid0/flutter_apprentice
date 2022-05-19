@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/models.dart';
 
 class LoginScreen extends StatelessWidget {
   // TODO: LoginScreen MaterialPage Helper
+  static MaterialPage page() {
+    return MaterialPage(
+      name: FooderlichPages.loginPath,
+      key: ValueKey(FooderlichPages.loginPath),
+      child: const LoginScreen(),
+    );
+  }
 
   final String? username;
 
@@ -20,25 +29,27 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 200,
-                child: Image(
-                  image: AssetImage(
-                    'assets/fooderlich_assets/rw_logo.png',
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 200,
+                  child: Image(
+                    image: AssetImage(
+                      'assets/fooderlich_assets/rw_logo.png',
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              buildTextfield(username ?? '🍔 username'),
-              const SizedBox(height: 16),
-              buildTextfield('🎹 password'),
-              const SizedBox(height: 16),
-              buildButton(context),
-            ],
+                const SizedBox(height: 16),
+                buildTextfield(username ?? '🍔 username'),
+                const SizedBox(height: 16),
+                buildTextfield('🎹 password'),
+                const SizedBox(height: 16),
+                buildButton(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -59,6 +70,8 @@ class LoginScreen extends StatelessWidget {
         ),
         onPressed: () async {
           // TODO: Login -> Navigate to home
+          Provider.of<AppStateManager>(context, listen: false)
+              .login('mockUsername', 'mockPassword');
         },
       ),
     );
