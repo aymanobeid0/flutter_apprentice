@@ -25,7 +25,7 @@ class RecipeDetails extends StatelessWidget {
                       child: CachedNetworkImage(
                         // TODO 1
                         imageUrl:
-                            'https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg',
+                            'https://assets.epicurious.com/photos/5732526f1877f76a0e20831c/master/pass/EP_05102016_PeruvianStyleRoastChicken_recipe_.jpg',
                         alignment: Alignment.topLeft,
                         fit: BoxFit.fill,
                         width: size.width,
