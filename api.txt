@@ -1,0 +1,10 @@
+Application ID
+17b11a0f
+
+
+Application Keys
+d59b9d8ce810db6dd76750662e6c6754
+
+
+ base URL is
+  https://api.edamam.com
