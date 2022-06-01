@@ -11,6 +11,7 @@ import '../recipes/recipe_details.dart';
 import '../colors.dart';
 import 'package:chopper/chopper.dart';
 import '../../network/model_response.dart';
+import '../../data/models/models.dart';
 
 class RecipeList extends StatefulWidget {
   const RecipeList({Key? key}) : super(key: key);
@@ -277,7 +278,15 @@ class _RecipeListState extends State<RecipeList> {
       onTap: () {
         Navigator.push(topLevelContext, MaterialPageRoute(
           builder: (context) {
-            return const RecipeDetails();
+            final detailRecipe = Recipe(
+                label: recipe.label,
+                image: recipe.image,
+                url: recipe.url,
+                calories: recipe.calories,
+                totalTime: recipe.totalTime,
+                totalWeight: recipe.totalWeight);
+            detailRecipe.ingredients = convertIngredients(recipe.ingredients);
+            return RecipeDetails(recipe: detailRecipe);
           },
         ));
       },
