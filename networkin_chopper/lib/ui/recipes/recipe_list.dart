@@ -12,6 +12,8 @@ import '../colors.dart';
 import 'package:chopper/chopper.dart';
 import '../../network/model_response.dart';
 import '../../data/models/models.dart';
+import '../../mock_service/mock_service.dart';
+import 'package:provider/provider.dart';
 
 class RecipeList extends StatefulWidget {
   const RecipeList({Key? key}) : super(key: key);
@@ -203,7 +205,7 @@ class _RecipeListState extends State<RecipeList> {
     // TODO: change with new response
     return FutureBuilder<Response<Result<APIRecipeQuery>>>(
       // TODO: change with new RecipeService
-      future: RecipeService.create().queryRecipes(
+      future: Provider.of<MockService>(context).queryRecipes(
           searchTextController.text.trim(),
           currentStartPosition,
           currentEndPosition),

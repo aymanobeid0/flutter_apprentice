@@ -5,6 +5,7 @@ import 'ui/main_screen.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'data/memory_repository.dart';
+import 'mock_service/mock_service.dart';
 
 Future<void> main() async {
   // TODO: Call _setupLogging()
@@ -27,19 +28,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MemoryRepository>(
-      lazy: false,
-      create: (_) => MemoryRepository(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MemoryRepository>(
+          lazy: false,
+          create: (_) => MemoryRepository(),
+        ),
+        Provider(
+          // 4
+          create: (_) => MockService()..create(), lazy: false,
+        ),
+      ],
       child: MaterialApp(
-          title: 'recipes',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.light,
-            primaryColor: Colors.white,
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: MainScreen()),
+        title: 'Recipes',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.white,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const MainScreen(),
+      ),
     );
   }
 }
